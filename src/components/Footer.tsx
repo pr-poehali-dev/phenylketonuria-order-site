@@ -20,14 +20,28 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Покупателям</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white">
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById("products")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="hover:text-white"
+                >
                   Каталог
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white">
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById("benefits")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="hover:text-white"
+                >
                   Доставка
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
@@ -46,9 +60,16 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Информация</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white">
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById("about")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                  className="hover:text-white"
+                >
                   О заболевании
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
@@ -73,11 +94,15 @@ const Footer = () => {
             <ul className="space-y-2 text-gray-400">
               <li className="flex items-center space-x-2">
                 <Icon name="Phone" size={16} />
-                <span>8 (800) 123-45-67</span>
+                <a href="tel:+78001234567" className="hover:text-white">
+                  8 (800) 123-45-67
+                </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Icon name="Mail" size={16} />
-                <span>info@pkuhealth.ru</span>
+                <a href="mailto:info@pkuhealth.ru" className="hover:text-white">
+                  info@pkuhealth.ru
+                </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Icon name="MapPin" size={16} />

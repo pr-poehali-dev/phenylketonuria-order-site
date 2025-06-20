@@ -1,6 +1,17 @@
 import Icon from "@/components/ui/icon";
 
-const Header = () => {
+interface HeaderProps {
+  cartCount?: number;
+}
+
+const Header = ({ cartCount = 0 }: HeaderProps) => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,39 +23,44 @@ const Header = () => {
             </span>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <a
-              href="#"
+            <button
+              onClick={() => scrollToSection("hero")}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Главная
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => scrollToSection("about")}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               О заболевании
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => scrollToSection("products")}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Продукты
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => scrollToSection("benefits")}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Доставка
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              onClick={() => scrollToSection("footer")}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Контакты
-            </a>
+            </button>
           </nav>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors relative">
             Корзина
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </button>
         </div>
       </div>

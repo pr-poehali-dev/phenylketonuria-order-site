@@ -1,22 +1,40 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
 interface ProductCardProps {
+  id: string;
   name: string;
   protein: number;
   price: number;
   weight: string;
   image: string;
   description: string;
+  onAddToCart: (product: {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+  }) => void;
 }
 
 const ProductCard = ({
+  id,
   name,
   protein,
   price,
   weight,
   image,
   description,
+  onAddToCart,
 }: ProductCardProps) => {
+  const [isAdding, setIsAdding] = useState(false);
+
+  const handleAddToCart = () => {
+    setIsAdding(true);
+    onAddToCart({ id, name, price, image });
+    setTimeout(() => setIsAdding(false), 800);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <img src={image} alt={name} className="w-full h-48 object-cover" />
@@ -35,9 +53,17 @@ const ProductCard = ({
 
         <div className="flex justify-between items-center">
           <span className="text-2xl font-bold text-gray-900">{price}₽</span>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
-            <Icon name="Plus" size={16} />
-            <span>В корзину</span>
+          <button
+            onClick={handleAddToCart}
+            disabled={isAdding}
+            className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
+              isAdding
+                ? "bg-green-600 text-white"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+            }`}
+          >
+            <Icon name={isAdding ? "Check" : "Plus"} size={16} />
+            <span>{isAdding ? "Добавлено" : "В корзину"}</span>
           </button>
         </div>
       </div>
